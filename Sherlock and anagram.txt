@@ -1,0 +1,102 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the sherlockAndAnagrams function below.
+    static int sherlockAndAnagrams(String s) {
+        int count=0;
+       Set<String> uu=new HashSet<String>(Arrays.asList(s.split("")));
+       //System.out.println(uu.size());
+       if(uu.size()==1)
+       {
+           int l=s.length();
+           while(l>0)
+           {
+               count=count+l;
+               l=l-1;
+           }
+           
+       }
+       else{
+        Map<String,Integer> map=new HashMap<String,Integer>();
+        Set<String> list=new HashSet<String>();
+        
+        for(int i=0;i<s.length();i++)
+        {
+            for(int j=i+1;j<=s.length();j++)
+            {
+                String str=s.substring(i,j);
+                char[] arr=str.toCharArray();
+                Arrays.sort(arr);
+                str=String.valueOf(arr);
+                list.add(str);
+                if(map.containsKey(str))
+                {
+                    Integer t=map.get(str);
+                    map.put(str,t+1);
+                
+                    
+                }
+                else{
+                    map.put(str,1);
+                }
+                
+            }
+        }
+        List<String> list1 = new ArrayList<String>(list);
+        //Set<String> set=new HashSet<String
+        for(int k=0;k<map.size();k++)
+        {
+            String d=list1.get(k);
+            int y=map.get(d);
+            if(y%2==0 && y!=1)
+            {
+                count+=y/2;
+            }
+            else if(y%2!=0 && y!=1)
+            {
+                count+=y;
+            }
+        }
+        
+        //System.out.println(map);
+
+        
+
+        //return count;
+        
+       }
+       //System.out.println(count);
+       return count;
+        
+
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int q = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        for (int qItr = 0; qItr < q; qItr++) {
+            String s = scanner.nextLine();
+
+            int result = sherlockAndAnagrams(s);
+
+            bufferedWriter.write(String.valueOf(result));
+            bufferedWriter.newLine();
+        }
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}

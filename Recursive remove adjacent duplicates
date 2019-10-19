@@ -1,0 +1,82 @@
+import java.util.*;
+public class HelloWorld{
+
+     public static void main(String []args){
+        String s = "anab";
+        String ans = removeAll(s);
+        System.out.println(ans);
+        
+     }
+     public static String removeAll(String s)
+     {
+         String outPut="";
+         
+         if(s.length()==1)
+         {
+            outPut = s;
+         }
+         if(s.length()==2)
+         {
+             if(s.charAt(0)!=s.charAt(1))
+             {
+                 outPut = s;
+             }
+             else{
+                 outPut = "Empty";
+             }
+         }
+         if(s.length()>2)
+         {
+             String[] str = s.split("");
+             int count = 0;
+             for(int j=1;j<s.length()-1;j++)
+             {
+                 if(s.charAt(j-1)==s.charAt(j) || s.charAt(j)==s.charAt(j+1))
+                 {
+                     count++;
+                     break;
+                 }
+             }
+             Set<String> set = new HashSet<String>(Arrays.asList(str));
+             if(set.size()!=str.length && count!=0)
+             {
+                 String temp = "";
+                 if(s.charAt(0)!=s.charAt(1))
+                 {
+                     temp=temp+s.charAt(0);
+                 }
+                 for(int i=1;i<s.length()-1;i++)
+                 {
+                     char a = s.charAt(i-1);
+                     char b = s.charAt(i);
+                     char c = s.charAt(i+1);
+                     if(a!=b && c!=b)
+                     {
+                         temp+=s.charAt(i);
+                     }
+                 }
+                 if(s.charAt(s.length()-1)!=s.charAt(s.length()-2))
+                 {
+                     temp=temp+s.charAt(s.length()-1);
+                 }
+                 String[] aa = temp.split("");
+                 Set<String> set2 = new HashSet<String>(Arrays.asList(temp));
+                 if(set2.size()==temp.length())
+                 {
+                     outPut = temp;
+                 }
+                 else{
+                     outPut = removeAll(temp);
+                 }
+                 
+             }
+             else{
+                 outPut = s;
+             }
+             return outPut;
+         }
+         
+         return outPut;
+     }
+     
+} 

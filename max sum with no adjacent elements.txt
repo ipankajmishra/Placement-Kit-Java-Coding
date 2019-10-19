@@ -1,0 +1,22 @@
+import java.util.*;
+import java.lang.Math;
+class Main{
+  public static void main(String args[])
+  {
+      int arr[] = {5,5,10,40,50,35};
+      int n  = arr.length;
+      int incl = arr[0];
+      int excl = 0;
+      int a = incl;
+      int b = excl;
+      for(int i=1;i<n;i++)
+      {
+        incl  = excl+arr[i];
+        excl = Math.max(a,b);
+        a = incl;
+        b = excl;
+      }
+      System.out.println(Math.max(a,b));
+  }
+  
+}

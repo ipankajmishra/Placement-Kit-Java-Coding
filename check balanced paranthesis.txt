@@ -1,0 +1,80 @@
+import java.util.*;
+public class Main
+{
+  public static void main (String[]args)
+  {
+    String s = "{{[()]}}{";
+      List < Character > list = new ArrayList <> ();
+      list.add (s.charAt(0));
+    int count = 0;
+    for (int i = 1; i < s.length (); i++)
+      {
+
+	char a = s.charAt (i);
+	char t;
+    if(list.size()!=0){
+        t = (list.get (list.size () - 1));	//.charValue();
+    }
+    else{
+        t = '$';
+    }
+	
+	//System.out.println(a==t);
+	//System.out.println(t);
+	if (a == '}')
+	  {
+
+	    if (t == '{')
+	      {
+		list.remove (list.size () - 1);
+		
+	      }
+	    else
+	      {
+		break;
+	      }
+
+	  }
+	else if (a == ')')
+	  {
+	    if (t == '(')
+	      {
+		list.remove (list.size () - 1);
+	      }
+	    else
+	      {
+		break;
+	      }
+	  }
+	else if (a == ']')
+	  {
+	    if (t == '[')
+	      {
+		list.remove (list.size () - 1);
+		
+	      }
+	    else
+	      {
+	           break;
+	      }
+	  }
+
+	else
+	  {
+	    list.add (s.charAt(i));
+	  }
+	System.out.println (list);
+
+
+      }
+    if (list.size()==0)
+      {
+	System.out.println ("Balanced");
+      }
+    else
+      {
+	System.out.println ("Not Balanced");
+      }
+    
+  }
+}

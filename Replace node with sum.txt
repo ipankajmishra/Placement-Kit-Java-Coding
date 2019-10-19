@@ -1,0 +1,53 @@
+class Node{
+  int data;
+  Node left,right;
+  public Node(int d)
+  {
+    data = d;
+    left=right = null;
+  }
+}
+
+class Main {
+  Node root;
+  public static int sum = 0; 
+  public static void main(String[] args) {
+    Main m = new Main();
+    m.root = new Node(10);
+    m.root.left = new Node(-2);
+    m.root.right = new Node(6);
+    m.root.left.left = new Node(8);
+    m.root.left.right = new Node(-4);
+    m.root.right.left = new Node(7);
+    m.root.right.right = new Node(5);
+    m.func(m.root);
+
+  }
+
+
+  void func(Node root)
+  {
+    sum=0;
+    if(root==null)
+    {
+      return;
+    }
+
+    int data = root.data;
+    findSum(root);
+    System.out.print(sum-data+" ");
+    func(root.left);
+    func(root.right);
+  }
+  
+  void findSum(Node root)
+  {
+    if(root == null)
+    {
+      return;
+    }
+    sum+=root.data;
+    findSum(root.left);
+    findSum(root.right);
+  }
+}

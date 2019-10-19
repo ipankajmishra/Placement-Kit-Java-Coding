@@ -1,0 +1,54 @@
+import java.util.*;
+import java.util.stream.Collectors;
+class Rextester{
+
+     public static void main(String []args){
+        int arr[]={1,4,7,100,9,10};
+        int l = arr.length;
+         int[] out = new int[l];
+        Stack<Integer> stack = new Stack<Integer>();
+         List<Integer> list = new ArrayList<>();
+         stack.push(arr[0]);
+         for(int i=1;i<l;i++)
+         {
+             //System.out.println(stack);
+             if(!stack.empty())
+             {
+                 //list.add(arr[i]);
+                 int element = stack.pop();
+                 while(element<arr[i])
+                 {
+                     list.add(arr[i]);
+                     System.out.println(element+"-> "+arr[i]);
+                     if(stack.empty())
+                     {
+                         break;
+                     }
+                      element=stack.pop();
+                        // stack.push(arr[i]);
+                     
+                 }
+                 if(element>arr[i])
+                 {
+                     stack.push(element);
+                 }
+                 
+             }
+             stack.push(arr[i]);
+             
+             
+         }
+         while(!stack.empty())
+         {
+             int tempp = stack.pop();
+             System.out.println(tempp+"-> "+"-1");
+         }
+         
+         //System.out.println(list);
+        // System.out.print(stack);
+             
+        
+     }
+     
+     
+}

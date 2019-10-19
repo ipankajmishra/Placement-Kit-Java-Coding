@@ -1,0 +1,29 @@
+import java.util.*;
+import java.lang.Math;
+public class HelloWorld{
+    public static void main(String args[])
+    {
+        int n = 3;
+        String s = "";
+        printParenthesis(n,n,s);
+    }
+    public static void printParenthesis(int open, int close, String s)
+    {
+        if(open == 0 && close==0)
+        {
+            System.out.println(s);
+        }
+        if(open>close)
+        {
+            return;
+        }
+        if(open>0)
+        {
+            printParenthesis(open-1,close,s+"(");
+        }
+        if(close>0)
+        {
+            printParenthesis(open,close-1,s+")");
+        }
+    }
+}

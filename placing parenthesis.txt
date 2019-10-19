@@ -1,0 +1,142 @@
+import java.util.*;
+class Main{
+  public static String ot = "";
+  public static Map<Integer,String> test = new HashMap<>();
+public static boolean isOperator(char op)
+{
+	return (op == '+' || op == '-' || op == '*');
+}
+
+
+public static ArrayList<Integer> possibleResultUtil(String input, TreeMap< String, ArrayList<Integer>> memo)
+{
+	
+	if (memo.containsKey(input))
+	{
+		return new ArrayList<Integer>(memo.get(input));
+	}
+  
+	ArrayList<Integer> res = new ArrayList<Integer>();
+	for (int i = 0; i < input.length(); i++)
+	{
+		if (isOperator(input.charAt(i)))
+		{
+      
+			
+			ArrayList<Integer> resPre = possibleResultUtil(input.substring(0, i), new TreeMap< String, ArrayList<Integer>>(memo));
+			ArrayList<Integer> resSuf = possibleResultUtil(input.substring(i + 1), new TreeMap< String, ArrayList<Integer>>(memo));
+
+			
+			for (int j = 0; j < resPre.size(); j++)
+			{
+				for (int k = 0; k < resSuf.size(); k++)
+				{
+					if (input.charAt(i) == '+')
+					{
+            ot = "";
+						res.add(resPre.get(j) + resSuf.get(k));
+            ot+="("+(resPre.get(j))+" + " + (resSuf.get(k))+")";
+            test.put((resPre.get(j) + resSuf.get(k)),ot);
+					}
+					else if (input.charAt(i) == '-')
+					{
+            ot = "";
+						res.add(resPre.get(j) - resSuf.get(k));
+            ot+="("+(resPre.get(j))+" - " + (resSuf.get(k))+")";
+            test.put((resPre.get(j) - resSuf.get(k)),ot);
+          }
+					else if (input.charAt(i) == '*')
+					{
+            ot = "";
+						res.add(resPre.get(j) * resSuf.get(k));
+            ot+="("+(resPre.get(j))+" * " + (resSuf.get(k))+")";
+            test.put((resPre.get(j) * resSuf.get(k)),ot);
+					}
+				}
+			}
+		}
+	}
+
+	
+	if (res.size() == 0)
+	{
+		res.add(Integer.parseInt(input));
+	}
+
+	
+	memo.put(input, res);
+  //System.out.println(memo);
+	return new ArrayList<Integer>(res);
+}
+
+
+public static ArrayList<Integer> possibleResult(String input)
+{
+	TreeMap< String, ArrayList<Integer>> memo = new TreeMap< String, ArrayList<Integer>>();
+	return new ArrayList<Integer>(possibleResultUtil(input, memo));
+}
+
+
+public static void main(String args[])
+{
+	String input = "4*3-2+8";
+  String tempo = input;
+  tempo = tempo.replace("*","");
+  tempo = tempo.replace("-","");
+  tempo = tempo.replace("+","");
+  int nn = tempo.length()-1;
+	ArrayList<Integer> res = possibleResult(input);
+
+	/*for (int i = 0; i < res.size(); i++)
+	{
+		System.out.print(res.get(i));
+		System.out.print(" ");
+	}*/
+  System.out.println("Input "+input);
+  //System.out.println(ot);
+  int find = Collections.max(res);
+  System.out.println(find);
+  ArrayList<Integer> valid = new ArrayList<>();
+  String kk = "";
+  while(test.containsKey(find) && nn!=0)
+  {
+    String ty = test.get(find).substring(1,test.get(find).length()-1);
+    test.remove(find);
+     String jj = "("+ty+")";
+     if(kk=="")
+     {
+       kk+=jj;
+       nn--;
+     }
+     else{
+       kk=kk.replace(Integer.toString(find),jj);
+       nn--;
+     }
+    //System.out.println(jj);
+   
+
+    ty=ty.replace(" - "," ");
+    ty=ty.replace(" + "," ");
+    ty=ty.replace(" * "," ");
+    
+    String[] arr = ty.split(" ");
+    //System.out.println(Arrays.toString(arr));
+    int a = Integer.parseInt(arr[0].trim());
+    int b = Integer.parseInt(arr[1].trim());
+    if(!valid.contains(a))
+    {
+      valid.add(find);
+      valid.add(b);
+    }
+    find=Integer.parseInt(arr[0].trim());
+    
+    
+    //System.out.println(find);
+    
+  }
+  
+    
+  System.out.println("Output "+kk);
+	
+}
+}

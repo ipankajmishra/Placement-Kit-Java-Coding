@@ -1,0 +1,78 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the substrCount function below.
+    static long substrCount(int n, String s) {
+        int count=0;
+        Map<String,Integer> map=new HashMap<String,Integer>();
+        List<String> list=new ArrayList<String>();
+        for(int i=0;i<s.length();i++)
+        {
+            for(int j=i+1;j<=s.length();j++)
+            {
+                list.add(s.substring(i,j));
+            }
+        }
+        for(int k=0;k<list.size();k++)
+        {
+            if((list.get(k)).length()%2!=0 && (list.get(k)).length() >1 )
+            {
+                String s1=(list.get(k)).substring(0,(list.get(k)).length()/2);
+                String s2=(list.get(k)).substring((list.get(k)).length()/2+1,(list.get(k)).length());
+                //System.out.println(s1+s2);
+                Set<String> set=new HashSet<String>(Arrays.asList((s1+s2).split("")));
+                if(set.size()==1)
+                {
+                    count+=1;
+                }
+                
+                
+            }
+            else if((list.get(k)).length() == 1)
+            {
+                count+=1;
+            }
+            else if((list.get(k)).length() % 2 ==0)
+            {
+                Set<String> set=new HashSet<String>(Arrays.asList((list.get(k)).split("")));
+                if(set.size()==1)
+                {
+                    count+=1;
+                }
+            }
+        }
+        //System.out.println(count);
+        //System.out.println(list);
+        return count;
+
+
+
+}
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int n = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        String s = scanner.nextLine();
+
+        long result = substrCount(n, s);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}

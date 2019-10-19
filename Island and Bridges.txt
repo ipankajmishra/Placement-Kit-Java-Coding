@@ -1,0 +1,86 @@
+import java.util.*;
+import java.util.stream.Collectors;
+
+class Pair{
+  int x; int y;
+  public Pair(int i,int j)
+  {
+    this.x = i;
+    this.y = j;
+  }
+}
+
+class Main {
+
+  public static int[] row = {-1, -1, -1, 0, 1, 0, 1, 1};
+  public static int[] col = {-1, 1, 0, -1, -1, 1, 0, 1};
+
+  public static boolean isSafe(int mat[][],boolean processed[][],int x,int y)
+  {
+    return (x>=0 && x<mat.length && y>=0 && y<mat[0].length && mat[x][y]==1 && !processed[x][y]);
+  }
+
+
+  public static void BFS(int mat[][],boolean processed[][], int i, int j)
+  {
+      Queue<Pair> q = new ArrayDeque<>();
+      q.add(new Pair(i,j));
+      processed[i][j]=true;
+      while(!q.isEmpty())
+      {
+          int x = q.peek().x;
+          int y = q.peek().y;
+          q.poll();
+          for(int k=0;k<8;k++)
+          {
+            if(isSafe(mat,processed,x+row[k],y+col[k]))
+            {
+              processed[x+row[k]][y+col[k]]=true;
+              q.add(new Pair(x+row[k],y+col[k]));
+            }
+          }
+      }
+  }
+
+  public static void main(String[] args) {
+    int count=0;
+    int arr[][] ={{1,0,0,0,1},
+                  {0,0,0,1,0},
+                  {1,0,1,0,0},
+                  {0,1,0,1,0},
+                  {1,0,0,0,1}};
+    int n = 5;
+    boolean[][] processed = new boolean[n][n];
+    
+      for(int i=0;i<n;i++)
+      {
+        for(int j=0;j<n;j++)
+        {
+            if(arr[i][j]==1 && !processed[i][j])
+            {
+              BFS(arr,processed,i,j);
+              count++;
+            }
+        }
+      }  
+
+      
+    
+    /*for(int ii=0;ii<list.size();ii++)
+    {
+      System.out.println(list.get(ii).i+" "+list.get(ii).j);
+    }*/
+
+    System.out.println("Bridges"+" "+(count-1));
+    System.out.println("Islands"+" "+count);
+    
+    
+  }
+   
+  
+}
+
+
+/*int[] r = {i,i,i-1,i+1,i-1,i-1,i+1,i+1};
+            int[] c = {j+1,j-1,j,j,j-1,j+1,j-1,j+1};*/
+

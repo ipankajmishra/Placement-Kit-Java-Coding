@@ -1,0 +1,44 @@
+import java.util.*;
+class Pair{
+  int x, y;
+  public Pair(int a, int b)
+  {
+    this.x = a;
+    this.y = b;
+  }
+}
+class Main{
+  public static void main(String args[])
+  {
+    int a = 7;
+    int b = 3;
+    int k = 10;
+    int m = 97;
+    Pair p  = new Pair(a,b);
+    Pair out = find(p,k,m);
+    System.out.println(out.x+"+"+" i"+out.y);
+  }
+
+  public static Pair find(Pair complex,int k, int m)
+  {
+    Pair result = new Pair(1,0);
+    while(k>0)
+    {
+      if((k&1)==1)
+      {
+        result = multiply(result,complex,m);
+      }
+      complex = multiply(complex,complex,m);
+      k=k>>1;
+      
+    }
+    return result;
+  }
+
+  public static Pair multiply(Pair a, Pair b, int m)
+  {
+    int xx = ((a.x * b.x)%m-(a.y * b.y)%m+m)%m;
+    int yy = ((a.x * b.y)%m+(a.y * b.x)%m)%m;
+    return new Pair(xx,yy);
+  } 
+}

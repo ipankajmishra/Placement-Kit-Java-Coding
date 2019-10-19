@@ -1,0 +1,40 @@
+class Solution {
+    public boolean isMatch(String s, String p) {
+        int i=0;
+        int star = -1;
+        for(int j=0;j<p.length();j++)
+        {
+            char c = p.charAt(j);
+            if(i>s.length()-1 && c!='*')
+            {
+                return false;
+            }
+            if(c=='*')
+            {
+                if(j==p.length()-1)
+                {
+                    return true;
+                }
+                else{
+                    star = j;
+                }
+            }
+            else{
+                if((c!='?' && c!=s.charAt(i))||((i<(s.length() - 1)) && (j==p.length()-1)))
+                {
+                    if(star>-1)
+                    {
+                        i-=j-star-1;
+                        j=star;
+                    }
+                    else{
+                        return false;
+                    }
+                }
+                i++;
+            }
+            
+        }
+        return i==s.length();
+    }
+}

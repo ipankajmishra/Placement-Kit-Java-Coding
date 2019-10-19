@@ -1,0 +1,93 @@
+// A Java program for merging overlapping intervals 
+import java.util.*; 
+import java.lang.*;
+import java.util.Comparator; 
+import java.util.Stack; 
+public class Main { 
+
+	// The main function that takes a set of intervals, merges 
+	// overlapping intervals and prints the result 
+	public static void mergeIntervals(Interval arr[]) 
+	{ 
+		// Test if the given set has at least one interval 
+		if (arr.length <= 0) 
+			return; 
+	
+		// Create an empty stack of intervals 
+		Stack<Interval> stack=new Stack<>(); 
+	
+		// sort the intervals in increasing order of start time 
+    
+		Arrays.sort(arr,new Comparator<Interval>(){ 
+			public int compare(Interval i1,Interval i2) 
+			{ 
+				return i1.start-i2.start; 
+			} 
+		}); 
+    int max = 0;
+    for(int q=0;q<4;q++)
+    {
+      int count = 0;
+      int tempp = q;
+      for(int p=q;p<4;p++)
+      {
+          
+          if(arr[tempp].end<arr[p+1].start)
+          {
+            //System.out.println(arr[p].start);
+              count++;
+              tempp = p+1;
+          }
+      }
+      max=Math.max(max,count);
+    }
+    System.out.println(max+1);
+    
+    /*stack.push(arr[0]);
+    for(int k=1;k<4;k++)
+    {
+      if(stack.empty())
+      {
+        break;
+      }
+      Interval temp = stack.pop();
+      if(temp.end<arr[k].start)
+      {
+        stack.push(arr[k]);
+        stack.push(arr[k+1]);
+      }
+    }*/
+	
+		// push the first interval to stack 
+		for(int j=0;j<5;j++)
+    {
+      System.out.println(arr[j].start+" "+arr[j].end);
+    }
+    /*while(!stack.empty())
+    {
+      Interval t = stack.pop();
+      System.out.print(t.start+" "+t.end);
+    }*/
+	} 
+
+	public static void main(String args[]) { 
+		Interval arr[]=new Interval[5]; 
+		arr[0]=new Interval(5,24); 
+		arr[1]=new Interval(39,60); 
+		arr[2]=new Interval(15,28); 
+		arr[3]=new Interval(27,40); 
+    arr[4]=new Interval(50,90); 
+		mergeIntervals(arr); 
+	} 
+} 
+
+class Interval 
+{ 
+	int start,end; 
+	Interval(int start, int end) 
+	{ 
+		this.start=start; 
+		this.end=end; 
+	} 
+} 
+// This code is contributed by Gaurav Tiwari 

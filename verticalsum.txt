@@ -1,0 +1,88 @@
+import java.util.*;
+class Node{
+    
+    int value;
+    Node left,right;
+    public Node(int value)
+    {
+        this.value=value;
+        left=null;
+        right =null;
+    }
+}
+
+
+
+public class Main{
+    public static Node root;
+
+     public static void main(String []args){
+         Main bt = new Main();
+         bt.add(6);
+         bt.add(4);
+         bt.add(8);
+         bt.add(3);
+         bt.add(5);
+         bt.add(7);
+         bt.add(9);
+         bt.verticalsum(root);
+        
+     }
+     
+     void add(int value)
+     {
+         root=addrecursive(root,value);
+     }
+     
+     Node addrecursive(Node current, int value)
+     {
+         if(current==null)
+         {
+             return new Node(value);
+         }
+         if(value<current.value)
+         {
+             current.left=addrecursive(current.left,value);
+         }
+         else if(value>current.value)
+         {
+             current.right=addrecursive(current.right,value);
+         }
+         else{
+             return current;
+         }
+         return current;
+     }
+     
+     void verticalsum(Node root)
+     {
+         if(root==null)
+         {
+             return;
+         }
+         Map<Integer,Integer> hm = new HashMap<Integer,Integer>();
+         
+         verticalsumUtil(root,0,hm);
+         
+         if(hm!=null)
+         {
+             System.out.print(hm);
+         }
+     }
+     
+     void verticalsumUtil(Node root,int hD, Map<Integer,Integer> hm)
+     {
+         if(root==null)
+         {
+             return;
+         }
+         verticalsumUtil(root.left,hD-1,hm);
+         
+         int sum = (hm.get(hD)==null?0:hm.get(hD));
+         hm.put(hD,sum+root.value);
+         
+         verticalsumUtil(root.right,hD+1,hm);
+     }
+     
+     
+}

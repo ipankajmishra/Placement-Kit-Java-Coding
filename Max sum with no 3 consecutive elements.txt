@@ -1,0 +1,33 @@
+public class HelloWorld{
+
+     public static void main(String []args){
+         int[] ar = {1, 2, 3};
+         int sum=0;
+         int count=0;
+         for(int i =0;i<ar.length;i++)
+         {
+             sum=sum+ar[i];
+             count++;
+              //System.out.println(sum);
+             if(count%2==0 && count!=0)
+             {
+                 i++;
+             }
+         }
+         
+         
+         int sum1=0;
+         int count1=0;
+         for(int i =2;i<ar.length;i++)
+         {
+             sum1=sum1+ar[i];
+             count1++;
+              //System.out.println(sum1);
+             if(count1%2==0 && count1!=0)
+             {
+                 i++;
+             }
+         }
+         System.out.print(Math.max(sum,sum1+ar[0]));
+     }
+}

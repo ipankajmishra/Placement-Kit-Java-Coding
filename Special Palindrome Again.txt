@@ -1,0 +1,93 @@
+import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashSet;
+
+public class ArrayToSet {
+   public static void main(String[] args) {
+		
+	String str1="aaaa";
+	int count =0;
+	
+	//int i=0;
+	//char[] vowes=str1.toCharArray();
+	
+		
+	//String[] vowels = str1.split("");
+//char[] vowels = vowe.toCharArray();
+	//System.out.println(vowels[7]);
+		
+	//Set<String> vowelsSet = new HashSet<String>(Arrays.asList(vowels));
+	//ArrayList<String> list = new ArrayList<String>(vowelsSet);
+	//String str=list.toString().replaceAll(",", "");
+    
+    //System.out.println(count);
+    
+    for(int q=0;q<str1.length();q++)
+    {   
+        for(int j=q+1; j<=str1.length();j++ )
+        {
+            int tempcount=0;
+            String strrr=str1.substring(q,j);
+            System.out.println(strrr);
+            char[] temp=strrr.toCharArray();
+            int len=temp.length;
+            //System.out.println(len);
+            if(len%2==0)
+            {
+                for(int h=0;h<len/2;h++)
+                {
+                    if(temp[h]==temp[len-1-h])
+                    {
+                        tempcount+=1;
+                        
+                    }
+                }
+                if(tempcount==len/2)
+                {
+                    count+=1;
+                    System.out.println(count);
+                }
+            }
+            else
+            {
+                for(int h=0;h<len/2;h++)
+                {
+                    if(temp[h]==temp[len-1-h])
+                    {
+                        tempcount+=1;
+                        //System.out.println(count);
+                    }
+                }
+                if(tempcount==(len-1)/2)
+                {
+                    count+=1;
+                    System.out.println(count);
+                }
+                    
+            }
+             
+        
+        
+        }
+    }
+    //System.out.println(count);
+    
+    
+    
+	//int[] arr=new int[list.size()];
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * Unlike List, Set is NOt backed by array, 
+	 * so we can do structural modification without any issues.
+	 */
+	
+   }
+}

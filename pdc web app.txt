@@ -1,0 +1,2 @@
+https://console.firebase.google.com/project/pdcenter-b204d/overview
+https://pdcenter-b204d.firebaseapp.com

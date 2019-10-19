@@ -1,0 +1,30 @@
+import java.util.*;
+public class Main{
+    public static void main(String args[])
+    {
+        String s = "1?11?00?1?";
+        findPattern(s);
+    }
+    public static void findPattern(String s)
+    {
+        Stack<String> stack = new Stack();
+        stack.push(s);
+        int index;
+        while(!stack.empty())
+        {
+            String temp  = stack.pop();
+            if((index = temp.indexOf('?')) != -1)
+            {
+                for(char ch='0';ch<='1';ch++)
+                {
+                    String k = temp.substring(0,index)+ch+temp.substring(index+1,temp.length());
+                    stack.push(k);
+                }
+            }
+            else{
+                System.out.println(Integer.valueOf(temp,2));
+            }
+        }
+        
+    }
+}

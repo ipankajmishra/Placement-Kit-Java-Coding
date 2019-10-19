@@ -1,0 +1,37 @@
+import java.util.*;
+public class HelloWorld{
+
+     public static void main(String []args){
+        //System.out.println("Hello World");
+        Map<Character,String> map = new HashMap<>();
+        int n = 1;
+        int num = 1;
+        int count=0;
+        String temp="";
+        while(n<=26)
+        {
+            
+            temp = temp + Integer.toString(num);
+            //System.out.println(temp);
+            if(count%3==0 && (char) (64+n) !='S' )
+            {
+                num++;
+                temp=Integer.toString(num);
+                
+            }
+            map.put((char)(64+n),temp);
+            n++;
+            if((char) (64+n) !='S')
+            {
+                count++;
+            }
+        }
+        map.put('Z',"9999");
+        String s = "WTTAAAPPP";
+        for(int i=0;i<s.length();i++)
+        {
+            System.out.print(map.get(s.charAt(i)));
+        }
+        //System.out.print(map);
+     }
+}

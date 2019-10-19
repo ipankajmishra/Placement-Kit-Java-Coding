@@ -1,0 +1,45 @@
+import java.util.*;
+public class HelloWorld{
+    public static List<String> list = new ArrayList<String>();
+     public static void main(String []args){
+        String s = "aebcbda";
+        int index = -1;
+        String curr = "";
+        printSubsequence(s,s.length(),index,curr);
+        //System.out.println(list);
+        System.out.println("Letters need to be removed = "+" "+(s.length()-max));
+     }
+     public static int max = Integer.MIN_VALUE;
+     
+     public static void printSubsequence(String s,int length,int index,String outPut)
+     {
+         if(index==length)
+         {
+             return;
+         }
+         int count=0;
+         for(int j=0;j<outPut.length()/2;j++)
+         {
+            if(outPut.charAt(j)!=outPut.charAt(outPut.length()-1-j))
+            {
+                count++;
+            }
+         }
+         if(count==0)
+         {
+             list.add(outPut);
+             if(max<outPut.length()){
+            max = outPut.length();
+         }
+         }
+         
+         
+         for(int i=index+1;i<length;i++)
+         {
+             outPut += s.charAt(i);
+             printSubsequence(s,length,i,outPut);
+             outPut = outPut.substring(0,outPut.length()-1);
+         }
+     }
+     
+}

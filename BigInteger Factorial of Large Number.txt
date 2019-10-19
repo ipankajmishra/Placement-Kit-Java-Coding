@@ -1,0 +1,25 @@
+import java.math.BigInteger; 
+public class HelloWorld{
+    
+    static BigInteger a = new BigInteger("1");
+    
+     public static void main(String []args){
+        int n = 6;
+        BigInteger bigInteger = BigInteger.valueOf(n);
+        //BigInteger s = fact(bigInteger);
+        System.out.print(fact(bigInteger));
+        
+     }
+     
+     static BigInteger fact(BigInteger n)
+     {
+         BigInteger ff = new BigInteger("1");
+         BigInteger s1 = new BigInteger("1");
+         while(n.intValue() > 1)
+         {
+             ff=ff.multiply(n);
+             n=n.subtract(s1);
+         }
+         return ff;
+     }
+}

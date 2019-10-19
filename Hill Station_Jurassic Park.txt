@@ -1,0 +1,66 @@
+/* package codechef; // don't place package name! */
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+/* Name of the class has to be "Main" only if the class is public. */
+class Codechef
+{
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		Scanner sc = new Scanner(System.in);
+		String s = sc.nextLine();
+		String[] ar = s.split(" ");
+		int n = Integer.parseInt(ar[0]);
+		int m = Integer.parseInt(ar[1]);
+		int q = Integer.parseInt(ar[2]);
+		int p = Integer.parseInt(ar[3]);
+		int r = Integer.parseInt(ar[4]);
+		int k = Integer.parseInt(ar[5]);
+		int[] arr = new int[n];
+		for(int i=0;i<n;i++)
+		{
+		    arr[i]=-1;
+		}
+		int total = 0;
+		int nn = n;
+		int rr = r;
+		for(int i=0;i<k;i++)
+		{
+		    if(rr==r)
+		    {
+		        if(m>0)
+		        {
+		            m--;
+		            q++;
+		            rr=0;
+		        }
+		    }
+		    rr++;
+		    for(int j=0;j<nn;j++)
+		    {
+		        if(arr[j]!=-1)
+		        {
+		            arr[j]++;
+		            if(arr[j]==p)
+		            {
+		                total++;
+		                n++;
+		                arr[j]=-1;
+		            }
+		        }
+		    }
+		    for(int j=0;j<nn;j++)
+		    {
+		        if(n>0 && q>0 && arr[j]==-1)
+		        {
+		            n--;
+		            q--;
+		            arr[j]=0;
+		        }
+		    }
+		}
+		System.out.println(n+" "+total+" "+m+" "+q);
+	}
+}

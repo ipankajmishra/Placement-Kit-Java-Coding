@@ -1,0 +1,28 @@
+public class HelloWorld{
+
+     public static void main(String []args){
+        int n = 153;
+        int temp=n;
+        int count=0;
+        int result=0;
+        while(temp!=0)
+        {
+            temp /=10;
+            ++count;
+        }
+        temp = n;
+        while(temp!=0)
+        {
+            int rem  = temp%10;
+            result+=(int) Math.pow(rem,count);
+            temp /= 10;
+        }
+        if(result == n)
+        {
+            System.out.print("ArmStrong");
+        }
+        else{
+            System.out.print("Not Armstrong");
+        }
+     }
+}

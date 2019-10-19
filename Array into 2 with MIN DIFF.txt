@@ -1,0 +1,26 @@
+import java.util.*;
+public class Main{
+    static List<Integer> list0 = new ArrayList <>();
+    static List<Integer> list1 = new ArrayList <>();
+    public static void main(String args[])
+    {
+       int[] S = { 3, 1, 4, 2, 2, 1 };
+       int min = minDiffPart(S,S.length-1,0,0);
+       System.out.print(min);
+    }
+    public static int minDiffPart(int[] s, int n, int S1, int S2 )
+    {
+        if(n<0)
+        {
+            return(Math.abs(S1-S2));
+        }
+        int inc = minDiffPart(s,n-1,S1+s[n],S2);
+        
+        int exc = minDiffPart(s,n-1,S1,S2+s[n]);
+        return(Math.min(inc,exc));
+        
+    }
+    
+    
+   
+}

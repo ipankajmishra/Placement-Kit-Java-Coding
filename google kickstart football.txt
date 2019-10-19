@@ -1,0 +1,57 @@
+
+import java.util.*;
+class Main 
+{ 
+	static void printSubsets(int set[],int kk) 
+	{ 
+		int n = set.length; 
+    int ans = Integer.MAX_VALUE;
+		for (int i = 0; i < (1<<n); i++) 
+		{ 
+			List<Integer> l = new ArrayList<>();
+
+      int sum=0;
+      int max_here = Integer.MIN_VALUE;
+			for (int j = 0; j < n; j++) 
+      {
+        
+        if ((i & (1 << j)) > 0)
+        { 
+          l.add(set[j]);
+        }
+        if(l.size()==5)
+        {
+          break;
+        }
+      }
+      if(l.size()==kk)
+      {
+          int max=Integer.MIN_VALUE;
+        if(l.size()>0)
+        {
+          max=Collections.max(l);
+        }
+        
+        int temp_sum=0;
+        for(int j=0;j<l.size();j++)
+        {
+          temp_sum+=max-l.get(j);
+        }
+        if(ans>temp_sum)
+        {
+          ans = temp_sum;
+        }
+        	
+      }
+      
+		//System.out.println(l);	
+		}
+     System.out.println(ans);
+	} 
+	public static void main(String[] args) 
+	{ 
+		int set[] = {7,7,1,7,7};
+    int kk = 5; 
+		printSubsets(set,kk); 
+	} 
+} 

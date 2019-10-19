@@ -1,0 +1,90 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the checkMagazine function below.
+    static void checkMagazine(String[] magazine, String[] note) {
+      
+       String[] str=magazine;
+       String[] check=note;
+       for(int i=0;i<str.length;i++)
+       {
+           str[i]=str[i];
+       }
+       HashMap<String, Integer> map=new HashMap<>();
+       for(int i=1;i<=str.length;i++)
+       {
+           Integer t=map.get(str[i-1]);
+           if(t==null)
+           {
+               t=0;
+               map.put(str[i-1],t+1);
+           }
+           else{
+               map.put(str[i-1],t+1);
+           }
+           
+       }
+       //System.out.println(map);
+       int temp=-1;
+       int count=0;
+       for(int j=0;j<check.length;j++)
+       {
+           if(map.containsKey(check[j]) && map.get(check[j])!=0)
+           {
+               map.put(check[j],map.get(check[j])-1);
+               
+               count+=1;
+           }
+       }
+       if(count==check.length)
+       {
+           System.out.println("Yes");
+       }
+       else{
+           System.out.println("No");
+       }
+      
+    }  
+    
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        String[] mn = scanner.nextLine().split(" ");
+
+        int m = Integer.parseInt(mn[0]);
+
+        int n = Integer.parseInt(mn[1]);
+
+        String[] magazine = new String[m];
+
+        String[] magazineItems = scanner.nextLine().split(" ");
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        for (int i = 0; i < m; i++) {
+            String magazineItem = magazineItems[i];
+            magazine[i] = magazineItem;
+        }
+
+        String[] note = new String[n];
+
+        String[] noteItems = scanner.nextLine().split(" ");
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        for (int i = 0; i < n; i++) {
+            String noteItem = noteItems[i];
+            note[i] = noteItem;
+        }
+
+        checkMagazine(magazine, note);
+
+        scanner.close();
+    }
+}

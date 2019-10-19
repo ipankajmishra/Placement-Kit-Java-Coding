@@ -1,0 +1,89 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the substrCount function below.
+    static long substrCount(int n, String s) {
+        //String s="abcbaba";
+        int count=0;
+        for(int i=0;i<s.length();i++)
+        {
+            for(int j=i+1;j<=s.length();j++)
+            {
+                String m=s.substring(i,j);
+            
+            
+            
+            //String m= s.substring(i,s.length());
+            //String k= s.substring(0,i+1);
+            //System.out.println(m);
+            //System.out.println(k);
+            if(m.length() == 1 /*|| k.length()==1*/)
+            {
+                count=count+1;
+            }
+            else if(m.length()%2 !=0 && m.length()!=0 /*&& k.length()!=0 && k.length()%2 !=0 */) //odd
+            {
+                String b=m.substring(0,m.length()/2);
+                String c=m.substring(m.length()/2+1,m.length());
+                //String f=k.substring(0,k.length()/2);
+                //String g=k.substring(k.length()/2+1,k.length());
+                if(b.matches("^(.)\\1*$") && c.matches("^(.)\\1*$") && b.charAt(0)==c.charAt(0))
+                {
+                    count+=1;
+                }
+                /*if(f.matches("^(.)\\1*$") && g.matches("^(.)\\1*$") && f.charAt(0)==g.charAt(0))
+                {
+                    count+=1;
+                }*/
+            }
+            else if(m.length()!=0 /*&& k.length()!=0*/){ //even
+                String b=m.substring(0,m.length()/2);
+                String c=m.substring(m.length()/2,m.length());
+                //String f=k.substring(0,k.length()/2);
+                //String g=k.substring(k.length()/2,k.length());
+                if(b.matches("^(.)\\1*$") && c.matches("^(.)\\1*$") && b.charAt(0)==c.charAt(0))
+                {
+                    count+=1;
+                }
+                /*if(f.matches("^(.)\\1*$") && g.matches("^(.)\\1*$") && f.charAt(0)==g.charAt(0))
+                {
+                    count+=1;
+                }*/
+            }
+            
+        }
+            
+            
+        }
+        return count;
+        //System.out.println(count);
+
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int n = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        String s = scanner.nextLine();
+
+        long result = substrCount(n, s);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}

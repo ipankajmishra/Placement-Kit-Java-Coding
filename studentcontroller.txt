@@ -1,0 +1,133 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using Microsoft.AspNetCore.Mvc;
+using StudentDataAccess;
+
+namespace StudentServices.Controllers
+{
+    public class StudentController : ApiController
+    {
+        public IEnumerable<TblDutRecord> Get()
+        {
+            using (StudentDetailsEntities entities = new StudentDetailsEntities())
+            {
+                return entities.TblDutRecords.ToList();
+            }
+        }
+
+        public TblDutRecord Get(int id)
+        {
+            using (StudentDetailsEntities entities = new StudentDetailsEntities())
+            {
+                return entities.TblDutRecords.Find(id);
+            }
+        }
+
+
+        [HttpGet]
+            public IEnumerable<TblDutRecord> GetTbl_Menu(string MachineName)
+        {
+            using (StudentDetailsEntities entities = new StudentDetailsEntities())
+            {
+                var tbl_menu = entities.TblDutRecords;
+                return tbl_menu.Where(t => t.MachineName == MachineName).ToList();
+            }
+            
+        }
+
+        [HttpGet]
+        public IEnumerable<TblDutRecord> GetTbl_top1000(int top1000)
+        {
+            using (StudentDetailsEntities entities = new StudentDetailsEntities())
+            {
+                var tbl_menu = entities.TblDutRecords;
+                return tbl_menu.Where(t => t.ID > top1000 - 1000).ToList();
+            }
+
+        }
+
+
+        
+        [HttpGet]
+        public IEnumerable<TblDutRecord> GetTbl_topp(int Startid, string MachineName)
+        {
+            using (StudentDetailsEntities entities = new StudentDetailsEntities())
+            {
+                var tbl_menu = entities.TblDutRecords;
+                if(MachineName == null)
+                {
+                    return tbl_menu.Where(t =>
+                t.ID > Startid - 1000
+
+                ).ToList();
+                }
+                return tbl_menu.Where(t =>
+                t.ID > Startid - 1000 && t.MachineName == MachineName
+
+                ).ToList();
+            }
+
+        }
+
+
+        [HttpGet]
+        public IEnumerable<TblDutRecord> GetTbl_toplastt(int last, string MachineName)
+        {
+            using (StudentDetailsEntities entities = new StudentDetailsEntities())
+            {
+                DateTime expiryDate = DateTime.Today.AddDays(-1 * last);
+                string date = expiryDate.ToString("yyyy-MM-dd HH:mm:ss");
+                // iString = "2005-05-05 22:12 PM";
+                DateTime oDate = DateTime.ParseExact(date, "yyyy-MM-dd HH:mm:ss", null);
+                var tbl_menu = entities.TblDutRecords;
+                return tbl_menu.Where(t =>
+                t.MachineName == MachineName).ToList().Where(x => DateTime.Compare(oDate, DateTime.ParseExact(x.StartTime, "yyyy-MM-dd HH:mm:ss", null)) <= 0  
+
+                ).ToList();
+
+                
+            }
+
+        }
+
+        //2019-05-30 13:15:58
+
+        /*private int validdate(string startTime, int last)
+        {
+            DateTime expiryDate = DateTime.Today.AddDays(-1 * last);
+            string date = expiryDate.ToString("MM/dd/yyyy");
+            string[] stringbefore = date.Split('/');
+            String[] stringnow = startTime.Split('-');
+            DateTime date1 = new DateTime(System.Convert.ToInt32(stringbefore[2]), System.Convert.ToInt32(stringbefore[0]),
+                                 System.Convert.ToInt32(stringbefore[1]),0,0,0);
+
+            // creating object of DateTime 
+            DateTime date2 = new DateTime(System.Convert.ToInt32(stringnow[2]), System.Convert.ToInt32(stringnow[1]),
+                                     System.Convert.ToInt32(stringnow[0]), 0, 0, 0);
+
+            // comparing date1 and date2 
+            // using Compare() method; 
+            int value = DateTime.Compare(date1, date2);
+            
+            // checking 
+            if (value > 0)
+            {
+                Console.Write("date1 is later than date2. ");
+                return 0;
+            }
+            else if (value <= 0)
+            {
+                Console.Write("date1 is earlier than date2. ");
+                //return true;
+            }
+            return 1;
+
+            
+        }*/
+    }
+
+}

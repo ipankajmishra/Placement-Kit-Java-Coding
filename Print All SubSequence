@@ -1,0 +1,41 @@
+import java.util.*;
+public class Main{
+    
+    public static List<String> list = new ArrayList<String>();
+
+     public static void main(String []args){
+        String s = "abc";
+        printSubsequence(s);
+     }
+     
+     public static void printSubsequence(String s)
+     {
+         int index = -1;
+         String curr = "";
+         printSub(s,s.length(),index,curr);
+         System.out.println(list);
+         
+     }
+     
+     public static void printSub(String s,int l,int index, String outPut )
+     {
+         if(index == l)
+         {
+             return;
+         }
+         if(outPut!=""){
+         
+            list.add(outPut);
+         }
+         
+         for(int i=index+1;i<l;i++)
+         {
+             outPut+=s.charAt(i);
+             printSub(s,l,i,outPut);
+             outPut = outPut.substring(0,outPut.length()-1);
+         }
+         
+         
+     }
+     
+} 

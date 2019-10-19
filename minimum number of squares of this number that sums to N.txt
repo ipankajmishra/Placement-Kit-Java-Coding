@@ -1,0 +1,44 @@
+import java.util.*;
+public class HelloWorld{
+
+     public static void main(String []args){
+         
+        
+        int n = minSquares(100);
+         System.out.print(n);
+         
+         
+     }
+     public static int minSquares(int x)
+     {
+         if(x<=3)
+         {
+             return x;
+         }
+         
+         int[] d = new int[x+1];
+         d[0]=0;
+         d[1]=1;
+         d[2]=2;
+         d[3]=3;
+         for(int i=4;i<=x;i++)
+         {
+             d[i]=i;
+             for(int j=1;j<=i;j++)
+             {
+                 int temp=j*j;
+                 if(temp>i)
+                 {
+                     break;
+                 }
+                 else{
+                     d[i]=Math.min(d[i],1+d[i-temp]);
+                 }
+             }
+             
+         }
+         int res = d[x];
+         return res;
+     }
+}
+

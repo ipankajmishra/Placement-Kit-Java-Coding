@@ -1,0 +1,72 @@
+import java.util.*;
+public class HelloWorld{
+
+     public static void main(String []args){
+        int[] arr = {2, 3, 2, 4, 5, 12, 2, 3, 3, 3, 12};
+        Arrays.sort(arr);
+        List<Integer> list01 = new ArrayList<Integer>();
+        for(int i=0;i<arr.length;i++)
+        {
+            list01.add(arr[i]);
+        }
+        Collections.sort(list01);
+        //Collections.reverse(list01);
+        LinkedHashSet<Integer> set = new LinkedHashSet<>(list01);
+        List<Integer> list0 = new ArrayList<Integer>(set);
+        LinkedHashMap<Integer,Integer> map  = new LinkedHashMap<Integer,Integer>();
+        for(int j=0;j<list01.size();j++)
+        {
+            if(!map.containsKey(list01.get(j)))
+            {
+                map.put(list01.get(j),1);
+            }
+            else{
+                int temp = map.get(list01.get(j));
+                map.put(list01.get(j),temp+1);
+            }
+            
+        }
+        List<Integer> value = new ArrayList<Integer>();
+        List<Integer> search = new ArrayList<Integer>();
+        for(int k=0;k<list0.size();k++)
+        {
+            value.add(map.get(list0.get(k)));
+            search.add(map.get(list0.get(k)));
+        }
+        
+        
+        
+        //System.out.println(search);
+        Collections.sort(value,Collections.reverseOrder());
+        //System.out.println(map);
+        //System.out.println(list0);
+        //System.out.println(value);
+        
+        //System.out.println(search);
+        for(int m=0;m<value.size();m++)
+        {
+            int count=0;
+            int freq=value.get(m);
+            //System.out.print(freq);
+            int temp=0;
+            for(int h=0;h<search.size();h++)
+            {
+                if(search.get(h)==freq)
+                {
+                    temp=h;
+                    //System.out.println(search.get(h) + " "+ h);
+                    search.set(h,0);
+                    break;
+                }
+            }
+            int num = list0.get(temp);
+            for(int t=0;t<freq;t++)
+            {
+                System.out.print(num+" ");
+            }
+            //System.out.println(search);
+            //System.out.print(num+" ");
+        }
+        
+     }
+}

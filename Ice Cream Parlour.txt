@@ -1,0 +1,74 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the whatFlavors function below.
+    static void whatFlavors(int[] costs, int money) {
+        /*String k="";
+        int[] arr=new int[2];
+        for(int i=0;i<cost.length;i++)
+        {
+            for(int j=0;j<cost.length;j++)
+            {
+                if(cost[i]+cost[j]==money && i!=j && i<j)
+                {
+                    i=i+1;
+                    j=j+1;
+                    System.out.println(i + " " + j);
+                    break;
+                }
+            }
+        }*/
+        //return k;
+
+        HashMap<Integer, Integer> map = new HashMap<>(); // key = cost, value = ice cream ID
+        for (int i = 0; i < costs.length; i++) {
+            int icecreamID = i + 1;
+            int cost       = costs[i];
+            
+            /* Find 2 flavors to buy that sum to "money" */
+            int otherCost  = money - cost;
+            if (map.containsKey(otherCost)) {
+                System.out.println(map.get(otherCost) + " " + icecreamID);
+            }
+            
+            map.putIfAbsent(cost, icecreamID);
+        }
+
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        int t = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        for (int tItr = 0; tItr < t; tItr++) {
+            int money = scanner.nextInt();
+            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+            int n = scanner.nextInt();
+            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+            int[] cost = new int[n];
+
+            String[] costItems = scanner.nextLine().split(" ");
+            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+            for (int i = 0; i < n; i++) {
+                int costItem = Integer.parseInt(costItems[i]);
+                cost[i] = costItem;
+            }
+
+            whatFlavors(cost, money);
+        }
+
+        scanner.close();
+    }
+}

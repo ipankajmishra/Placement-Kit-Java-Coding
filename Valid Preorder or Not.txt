@@ -1,0 +1,28 @@
+import java.util.*;
+public class IsBSTRepresentation {
+    boolean isBSTRepresentation(int[] arr) {
+        Stack<Integer> stack = new Stack<Integer>();
+        int root = Integer.MIN_VALUE;
+ 
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] < root) {
+                return false;
+            }
+ 
+            while (!stack.empty() && (Integer) stack.peek() < arr[i]) {
+                root = (Integer) stack.peek();
+                System.out.println(root);
+                stack.pop();
+            }
+            stack.push(arr[i]);
+        }
+        return true;
+    }
+ 
+public static void main(String[] args) {
+ 
+        IsBSTRepresentation isBSTRepresentation = new IsBSTRepresentation();
+        System.out.println(isBSTRepresentation.isBSTRepresentation(new int[]{25,15,10,4,12,22,18,24,50,35,31,44,70,66,90}));
+ 
+    }
+}

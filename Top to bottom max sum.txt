@@ -1,0 +1,30 @@
+import java.util.*;
+class Main{
+  public static void main(String args[])
+  {
+    int matrix[][] = {{1,2,3},
+                    {4,5,6},
+                    {7,8,9}};
+    int[][] mat = new int[3][3];
+    for(int u=0;u<3;u++){
+      for(int v=0;v<3;v++){
+        mat[u][v]=matrix[2-u][v];
+      }
+    }
+    int[] dp = new int[mat[0].length];
+    dp[0]=mat[0][0];
+    for(int i=1;i<mat[0].length;i++)
+    {
+      dp[i]=dp[i-1]+mat[0][i];
+    }
+    for(int k=1;k<mat.length;k++)
+    {
+      dp[0]=dp[0]+mat[k][0];
+      for(int j=1;j<mat[0].length;j++)
+      {
+        dp[j]=Math.max(dp[j]+mat[k][j],dp[j-1]+mat[k][j]);
+      }
+    }
+    System.out.println(dp[dp.length-1]);
+  }
+}

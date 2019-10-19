@@ -1,0 +1,27 @@
+import java.util.*;
+public class HelloWorld{
+
+     public static void main(String []args){
+         
+        
+        String s = "istr";
+        String t = "inputstring";
+         
+        int count=0;
+        for(int i=0;i<t.length();i++)
+        {
+            if(t.charAt(i)==s.charAt(count))
+            {
+                count++;
+                if(count==s.length())
+                {
+                    break;
+                }
+            }
+        }
+        System.out.print(count);
+         
+         
+         
+     }
+}

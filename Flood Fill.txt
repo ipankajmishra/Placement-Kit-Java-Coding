@@ -1,0 +1,81 @@
+import java.util.*;
+import java.lang.Math;
+class point{
+  int x ; int y;
+  public point(int i, int j)
+  {
+    this.x = i;
+    this.y = j;
+  }
+}
+class Main{
+  public static int[] row = {-1,1,0,0};
+  public static int[] col = {0,0,-1,1};
+  public static void main(String args[])
+  {
+    Main m = new Main();
+    
+      int mat[][] = {{1, 1, 1, 1, 1, 1, 1, 1},
+                      {1, 1, 1, 1, 1, 1, 0, 0},
+                      {1, 0, 0, 1, 1, 0, 1, 1},
+                      {1, 2, 2, 2, 2, 0, 1, 0},
+                      {1, 1, 1, 2, 2, 0, 1, 0},
+                      {1, 1, 1, 2, 2, 2, 2, 0},
+                      {1, 1, 1, 1, 1, 2, 1, 1},
+                      {2, 1, 1, 1, 1, 2, 2, 1},
+                      };
+      int x = 4;
+      int y = 4;
+      int new_color = 3;
+      int n =8;
+      boolean[][] visited = new boolean[n][n];
+      int[][] out = m.BFS(mat,visited,n,x,y,new_color);
+      m.print(out,n);
+
+  }
+
+  public static boolean isSafe(int[][] mat,boolean[][] visited,int n,int change,int i,int j)
+  {
+    return (i>=0) && (i<n) && (j>=0) && (j<n) && mat[i][j]==change && !visited[i][j];
+  }
+
+  int[][] BFS(int[][] mat, boolean[][] visited, int n, int xx, int yy, int color)
+  {
+
+    Queue<point> q = new ArrayDeque<>();
+    q.add(new point(xx,yy));
+    visited[xx][yy]=true;
+    int change = mat[xx][yy];
+    while(!q.isEmpty())
+    {
+      point temp = q.remove();
+      int x = temp.x;
+      int y = temp.y;
+      mat[x][y]=color;
+      for(int i=0;i<4;i++)
+      {
+        if(isSafe(mat,visited,n,change,x+row[i],y+col[i]))
+        {
+          visited[x+row[i]][y+col[i]]=true;
+          q.add(new point(x+row[i],y+col[i]));
+        }
+      }
+
+    }
+    return mat;
+  }
+
+  void print(int[][] mat,int n)
+  {
+    for(int i=0;i<n;i++)
+    {
+      for(int j=0;j<n;j++)
+      {
+        System.out.print(mat[i][j]+" ");
+      }
+      System.out.println();
+    }
+  }
+
+  
+}

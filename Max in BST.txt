@@ -1,0 +1,66 @@
+class Node{
+    Node left,right;
+    int value;
+    public Node(int data)
+    {
+        this.value = data;
+        this.left = null;
+        this.right = null;
+    }
+}
+public class HelloWorld{
+     Node root;
+     public void add(int value)
+     {
+         root = addrecursive(root,value);
+     }
+     public static void main(String []args){
+        HelloWorld bt = new HelloWorld();
+        bt.add(3);
+        bt.add(4);
+        bt.add(5);
+        bt.add(6);
+        bt.add(8);
+        bt.add(7);
+        bt.add(9);
+        bt.add(10);
+        
+        System.out.print(findMax(bt.root));
+     }
+     
+     static int findMax(Node node) 
+    { 
+        if (node == null) 
+            return Integer.MIN_VALUE; 
+  
+        int res = node.value; 
+        int lres = findMax(node.left); 
+        int rres = findMax(node.right); 
+  
+        if (lres > res) 
+            res = lres; 
+        if (rres > res) 
+            res = rres; 
+        return res; 
+    } 
+     
+     private Node addrecursive(Node current, int value)
+     {
+         if(current == null)
+         {
+             return new Node(value);
+         }
+         if(value<current.value)
+         {
+             current.left = addrecursive(current.left,value);
+         }
+         else if(value>current.value)
+         {
+             current.right = addrecursive(current.right,value);
+         }
+         else{
+             return current;
+         }
+         return current;
+     }
+}

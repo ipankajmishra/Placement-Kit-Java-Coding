@@ -1,0 +1,79 @@
+import java.util.*;
+class Node{
+    Node left, right;
+    int data;
+    public Node(int d)
+    {
+        left = right = null;
+        this.data = d;
+    }
+}
+
+public class HelloWorld{
+    Node root;
+    Node newroot;
+     public static void main(String []args){
+         HelloWorld main = new HelloWorld();
+            int arr[] = {3,4,1000,5,6,8,7,89};
+            for(int i=0;i<8;i++)
+            {
+                main.add(arr[i]);
+            }
+            //System.out.println(main.root.data);
+            int ans = main.findmax(main.root);
+            //System.out.println(main.root.data);
+            System.out.println(ans);
+            System.out.println("Maximum element is " + 
+                         main.findmax(main.root));
+     }
+     
+     void add(int value)
+     {
+         root = addrecursive(root,value);
+     }
+     
+     Node addrecursive(Node current, int value)
+     {
+         if (current==null)
+         {
+             return new Node(value);
+         }
+         if(value < current.data)
+         {
+             current.left = addrecursive(current.left,value);
+         }
+         else if(value > current.data)
+         {
+             current.right = addrecursive(current.right,value);
+         }
+         else{
+             return current;
+         }
+         return current;
+     }
+     
+     int findmax(Node node)
+     {
+         if(node==null)
+         {
+             return Integer.MIN_VALUE;
+         }
+         int res = node.data;
+         int lres = findmax(node.left);
+         int rres = findmax(node.right);
+         if(lres > res){
+             res = lres;
+         }
+         if(rres>res){
+             res=rres;
+         }
+         return res;
+         
+         
+         
+         
+         
+         
+         
+     }
+}

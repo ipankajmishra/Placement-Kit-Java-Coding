@@ -1,0 +1,47 @@
+class Node{
+  int data;
+  int direction=-9999;
+  Node left,right;
+  public Node(int d,int direc)
+  {
+    data = d;
+    left=right = null;
+    direction = direc;
+  }
+}
+
+class Main {
+  Node root;
+  public static int sum = 0; 
+  public static void main(String[] args) {
+    Main m = new Main();
+    m.root = new Node(10,0);
+    m.root.left = new Node(-2,-1);
+    m.root.right = new Node(6,1);
+    m.root.left.left = new Node(8,-1);
+    m.root.left.right = new Node(-4,1);
+    m.root.right.left = new Node(7,-1);
+    m.root.right.right = new Node(5,1);
+    m.func(m.root);
+
+  }
+
+
+  void func(Node root)
+  {
+    sum=0;
+    if(root==null)
+    {
+      return;
+    }
+    if(root.direction==1 || root.direction==0)
+    {
+        System.out.print(root.data+" ");
+    }
+    
+    func(root.left);
+    func(root.right);
+  }
+  
+  
+}

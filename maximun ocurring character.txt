@@ -1,0 +1,32 @@
+public class HelloWorld{
+
+     public static void main(String []args){
+        //Scanner in=new Scanner(System.in);
+        //int n=in.nextInt();
+        String str="aaaabbbbbcc";
+        char[] arr=str.toCharArray();
+        int max=0;
+        char x='\0';
+        int count=0;
+        for(int i=0;i<arr.length;i++)
+        {
+            count=0;
+            for(int j = 0;j<arr.length;j++)
+            {
+                //System.out.println(arr[j] + " "+ arr[i]);
+                if(arr[j]==arr[i])
+                {
+                    count=count+1;
+                    if(max<count)
+                    {
+                        max=count;
+                        x=arr[i];
+                    }
+                }
+            }
+        }
+        System.out.println(x);
+        
+        
+     }
+}

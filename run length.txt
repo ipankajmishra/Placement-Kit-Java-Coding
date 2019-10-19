@@ -1,0 +1,28 @@
+import java.util.*;
+public class HelloWorld{
+
+     public static void main(String []args){
+        String s = "pppppaaalaccce";
+        int l = s.length();
+        List<Integer> list = new ArrayList<>();
+        List<Character> charr = new ArrayList<>();
+        list.add(1);
+        charr.add(s.charAt(0));
+        for(int i=1;i<l;i++)
+        {
+            if(s.charAt(i-1)==s.charAt(i))
+            {
+                int a = list.get(list.size()-1);
+                list.remove(list.size()-1);
+                list.add(a+1);
+            }
+            else{
+                list.add(1);
+                charr.add(s.charAt(i));
+            }
+        }
+        System.out.println(list);
+        System.out.print(charr);
+        //System.out.println("Hello World");
+     }
+}

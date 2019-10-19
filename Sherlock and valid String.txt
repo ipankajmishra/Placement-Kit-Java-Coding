@@ -1,0 +1,108 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the isValid function below.
+    static String isValid(String s) {
+        String str1=s;
+    
+    int i=0;
+    char[] vowes=str1.toCharArray();
+    
+        
+    String[] vowels = str1.split("");
+//char[] vowels = vowe.toCharArray();
+    //System.out.println(vowels[7]);
+        
+    Set<String> vowelsSet = new HashSet<String>(Arrays.asList(vowels));
+    ArrayList<String> list = new ArrayList<String>(vowelsSet);
+    String str=list.toString().replaceAll(",", "");
+    char[] chars = str.substring(1, str.length()-1).replaceAll(" ", "").toCharArray();
+    int[] arr=new int[list.size()];
+    for(int j=0;j<list.size();j++)
+    {
+        int count=0;
+        for(int k=0;k<vowels.length;k++)
+        {
+            //System.out.println(list.get(j)+vowes[k]);
+            if(chars[j] == vowes[k])
+            {
+                count++;
+                //System.out.println(count);
+                
+     
+            } 
+           
+            
+            
+        }
+        arr[j]=count;
+          
+    }
+    int u=arr[0];
+    int badCounter=0;
+    int savior=0;
+    int savior2=0;
+    for(int h=0;h<arr.length-1;h++)
+    {
+        if(arr[h+1]==u)
+        {
+            badCounter=badCounter+1;
+        }
+        else if(arr[h+1]==u+1)
+        {
+            if(savior==0)
+            {
+                savior=1;
+            }
+        }
+        else if(arr[h+1]==u-1 )
+        {
+            savior2=savior2+1;
+        }
+        else{
+            savior=savior+1;
+        }
+    }
+    if(badCounter==arr.length-1)
+    {
+        return("YES");
+    }
+    else if(savior==1 && savior2==0){
+        
+        return("YES");
+    }
+    else if(savior2==1 && savior==0){
+        
+        return("YES");
+    }
+    else{
+        return("NO");
+    }
+    
+    //return "0";
+}
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String s = scanner.nextLine();
+
+        String result = isValid(s);
+
+        bufferedWriter.write(result);
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}

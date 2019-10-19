@@ -1,0 +1,47 @@
+import java.util.*;
+import java.io.*;
+
+class Node {
+    Node left;
+    Node right;
+    int data;
+    
+    Node(int data) {
+        this.data = data;
+        left = null;
+        right = null;
+    }
+}
+
+class Solution {
+
+	/*
+    class Node 
+    	int data;
+    	Node left;
+    	Node right;
+	*/
+    static int count=0;
+	public static int height(Node root) {
+      	// Write your code here.
+          if(root==null)
+          {
+              return -1;
+          }
+          else{
+              int ldepth = height(root.left);
+              int rdepth = height(root.right);
+              if(ldepth>rdepth)
+              {
+                  //return ldepth+1;
+                  count=ldepth+1;
+              }
+              else{
+                  //return rdepth+1;
+                  count=rdepth+1;
+              }
+          }
+          return count;
+    }
+
+	public static Node insert(Node root, int data) {

@@ -1,0 +1,88 @@
+import java.util.*;
+class Main {
+  public static void main(String[] args) {
+    String aa = "3 multiply 8 divide 4 add 7 multiply 2 subtract 5";
+    String[] ar = aa.split(" ");
+    List<String> list = new ArrayList<>();
+    for(int i=0;i<ar.length;i++)
+    {
+      list.add(ar[i]);
+    }
+    System.out.println();
+    System.out.println(aa);
+    list = divide(list);
+    list = multiply(list);
+    list = add(list);
+    list = subtract(list);
+    System.out.println(list.get(0));
+  }
+   public static List<String> divide(List<String> list)
+   {
+      int index = list.indexOf("divide");
+      if(index==-1)
+      {
+        return list;
+      }
+      int a = Integer.parseInt(list.get(index+1));
+      int b = Integer.parseInt(list.get(index-1));
+      list.set(index,Integer.toString(b/a));
+      list.remove(index+1);
+      list.remove(index-1);
+      return(divide(list));
+      //System.out.println(index);
+      
+      
+   }
+   public static List<String> multiply(List<String> list)
+   {
+      int index = list.indexOf("multiply");
+      if(index==-1)
+      {
+        return list;
+      }
+      int a = Integer.parseInt(list.get(index+1));
+      int b = Integer.parseInt(list.get(index-1));
+      list.set(index,Integer.toString(b*a));
+      list.remove(index+1);
+      list.remove(index-1);
+      return(multiply(list));
+      //System.out.println(index);
+      
+      
+   }
+   public static List<String> subtract(List<String> list)
+   {
+      int index = list.indexOf("subtract");
+      if(index==-1)
+      {
+        return list;
+      }
+      int a = Integer.parseInt(list.get(index+1));
+      int b = Integer.parseInt(list.get(index-1));
+      list.set(index,Integer.toString(b-a));
+      list.remove(index+1);
+      list.remove(index-1);
+      return(subtract(list));
+      //System.out.println(index);
+      
+      
+   }
+   public static List<String> add(List<String> list)
+   {
+      int index = list.indexOf("add");
+      if(index==-1)
+      {
+        return list;
+      }
+      int a = Integer.parseInt(list.get(index+1));
+      int b = Integer.parseInt(list.get(index-1));
+      list.set(index,Integer.toString(b+a));
+      list.remove(index+1);
+      list.remove(index-1);
+      return(add(list));
+      //System.out.println(index);
+      
+      
+   }
+  
+}

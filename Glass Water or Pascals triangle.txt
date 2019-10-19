@@ -1,0 +1,28 @@
+import java.util.*;
+public class HelloWorld{
+
+     public static void main(String []args){
+        List<List<Integer>> list = new ArrayList<>();
+        float amount = 2.0f;
+        int i = 2;
+        int j = 2;
+        for(int k=0;k<=i;k++)
+        {
+            int c = 1;
+            List<Integer> temp = new ArrayList<>();
+            //temp.add(1);
+            for(int l=0;l<=k;l++)
+            {
+                temp.add(c);
+                //System.out.print(c+" ");
+                c=c*(k+1-(l+1))/(l+1);
+                
+            }
+            //System.out.println();
+            list.add(temp);
+            //System.out.println(temp);
+        }
+        
+        System.out.println(list);
+     }
+}

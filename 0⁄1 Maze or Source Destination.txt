@@ -1,0 +1,82 @@
+import java.util.*;
+
+class Node{
+    int x,y,dist;
+    Node(int i,int j,int dist)
+    {
+        this.x=i;
+        this.y=j;
+        this.dist=dist;
+    }
+}
+public class Main{
+    private static int row[]={-1,0,0,1};
+    private static int col[]={0,-1,1,0};
+    public static void main(String args[])
+    {
+        /*int[][] mat =
+		{
+			{ 1, 1, 1, 1, 1, 0, 0, 1, 1, 1 },
+			{ 0, 1, 1, 1, 1, 1, 0, 1, 0, 1 },
+			{ 0, 0, 1, 0, 1, 1, 1, 0, 0, 1 },
+			{ 1, 0, 1, 1, 1, 0, 1, 1, 0, 1 },
+			{ 0, 0, 0, 1, 0, 0, 0, 1, 0, 1 },
+			{ 1, 0, 1, 1, 1, 0, 0, 1, 1, 0 },
+			{ 0, 0, 0, 0, 1, 0, 0, 1, 0, 1 },
+			{ 0, 1, 1, 1, 1, 1, 1, 1, 0, 0 },
+			{ 1, 1, 1, 1, 1, 0, 0, 1, 1, 1 },
+			{ 0, 0, 1, 0, 0, 1, 1, 0, 0, 1 },
+		};*/
+		
+		int mat[][]={
+		    { 0 , 3 , 1 , 0 },
+            { 3 , 0 , 3 , 3 },
+            { 3 , 3 , 0 , 3 },
+            { 0 , 3 , 3 , 3 }
+		    
+		};
+		
+		BFS(mat,0,2,2,0);
+    }
+    public static boolean isValid(int mat[][],boolean visited[][],int i,int j)
+    {
+        return (i>=0) && (i<mat.length) && (j>=0) && (j<mat[0].length) && mat[i][j]==3 && (!visited[i][j]);
+    }
+    
+    public static void BFS(int mat[][],int i,int j,int x,int y)
+    {
+        boolean[][] visited = new boolean[mat.length][mat[0].length];
+        visited[i][j] = true;
+        Queue<Node> q = new ArrayDeque<>();
+        q.add(new Node(i,j,0));
+        int min_Dist = Integer.MAX_VALUE;
+        
+        while(!q.isEmpty())
+        {
+            Node node = q.poll();
+            i=node.x;
+            j=node.y;
+            int dist = node.dist;
+            if(i==x && j==y)
+            {
+                min_Dist = dist;
+                break;
+            }
+            for(int k=0;k<4;k++)
+            {
+                if(isValid(mat,visited,i+row[k],j+col[k]))
+                {
+                    visited[i+row[k]][j+col[k]]=true;
+                    q.add(new Node(i+row[k],j+col[k],dist + 1));
+                }
+            }
+        }
+        if(min_Dist != Integer.MAX_VALUE)
+        {
+            System.out.println("The Shortest Path is"+" "+min_Dist);
+        }
+        else{
+            System.out.println("Cannot be reached");
+        }
+    }
+} 

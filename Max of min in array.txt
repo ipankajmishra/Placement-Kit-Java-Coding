@@ -1,0 +1,28 @@
+import java.util.*;
+import java.util.stream.Collectors;
+import java.lang.Math;
+class Main{
+  public static void main(String args[])
+  {
+    int arr[] = {10, 20, 30, 50, 10, 70, 30};
+    List<Integer> list = Arrays.stream(arr).boxed().collect(Collectors.toList());
+    int n=arr.length;
+    int i=1;
+    while(i<=n)
+    {
+      int j =0;
+      List<Integer> mini = new ArrayList<>();
+      while(j<=n-i)
+      {
+          List<Integer> sub = list.subList(j,j+i);
+          int minn = Collections.min(sub);
+          mini.add(minn);
+          //System.out.println(sub);
+          j++;
+      }
+      System.out.println(Collections.max(mini));
+      i++;
+    }
+
+  }
+}
